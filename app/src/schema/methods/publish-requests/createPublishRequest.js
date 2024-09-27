@@ -1,18 +1,30 @@
-const { PublishRequest } = require('../../../models');
+const { PublishRequest, Template } = require('../../../models');
 const { HOST } = require('../../../constants');
 
 module.exports = {
     mode: 'post',
     handler: async (req, res) => {
         try {
-            const { status } = req.body;
-            const userId = req.user.id;
+            const { status, templateName } = req.body;
+            const user = JSON.parse(JSON.stringify(req.user.dataValues));
             
-            const publishRequest = await PublishRequest.create({ status, author: userId });
+            const template = await Template.findOne({ where: { name: templateName } });
+
+            if (!template) {
+                res.status(404).json({
+                    message: 'This template does not exist.'
+                });
+            }
+
+            const publishRequest = await PublishRequest.create({ 
+                status, 
+                author: user.username, 
+                templateId: template.id 
+            });
 
             res.status(201).json({
                 _links: {
-                    href: `${HOST}/publish-requests/${publishRequest.id}/details`
+                    href: `${HOST}/publish_requests/${publishRequest.id}/details`
                 },
                 publishRequest: {
                     id: publishRequest.id,

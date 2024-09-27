@@ -16,7 +16,7 @@ module.exports = {
 
             res.json({
                 _links: {
-                    href: `${HOST}/publish-requests/${publishRequest.id}/details`
+                    href: `${HOST}/publish_requests/${publishRequest.id}/details`
                 },
                 publishRequest: {
                     id: publishRequest.id,

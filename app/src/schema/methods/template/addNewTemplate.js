@@ -15,7 +15,7 @@ module.exports = {
                 return res.status(400).json({ message: 'User does not exist' });
             }
 
-            const newTemplate = await Template.create({ name, content, username: user.username });
+            const newTemplate = await Template.create({ name, content, author: user.username });
 
             res.status(201).json({
                 _links: {

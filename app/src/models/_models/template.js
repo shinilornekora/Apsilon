@@ -11,7 +11,7 @@ module.exports = {
         allowNull: false,
         defaultValue: ''
     },
-    username: {
+    author: {
         type: DataTypes.STRING,
         allowNull: false,
         references: {

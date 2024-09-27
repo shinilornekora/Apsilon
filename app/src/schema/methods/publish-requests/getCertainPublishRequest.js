@@ -8,12 +8,12 @@ module.exports = {
             const publishRequest = await PublishRequest.findByPk(req.params.id);
 
             if (!publishRequest) {
-                return res.status(404).json({ message: 'Запрос на публикацию не найден' });
+                return res.status(404).json({ message: 'Cannot find any relevant requests.' });
             }
 
             res.json({
                 _links: {
-                    href: `${HOST}/publish-requests/${publishRequest.id}/details`
+                    href: `${HOST}/publish_requests/${publishRequest.id}/details`
                 },
                 publishRequest: {
                     id: publishRequest.id,
@@ -22,7 +22,7 @@ module.exports = {
             });
         } catch (error) {
             console.error(error);
-            res.status(500).json({ message: 'Ошибка при получении запроса на публикацию' });
+            res.status(500).json({ message: 'Request failed, no publishing data' });
         }
     }
 };

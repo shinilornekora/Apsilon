@@ -9,7 +9,7 @@ module.exports = {
                 return res.status(404).json({ message: 'Template is not found.' });
             }
             await template.destroy();
-            res.status(204).end(); // 204 No Content
+            res.status(204).end();
         } catch (error) {
             console.error(error);
             res.status(500).json({ message: 'Template deletion error.' });

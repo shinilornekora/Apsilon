@@ -3,13 +3,13 @@ const { HOST } = require('../../../constants');
 
 module.exports = {
     mode: 'get',
-    handler: async (req, res) => {
+    handler: async (_, res) => {
         try {
             const publishRequests = await PublishRequest.findAll();
 
             const formattedRequests = publishRequests.map(request => ({
                 _links: {
-                    href: `${HOST}/publish-requests/${request.id}`
+                    href: `${HOST}/publish_requests/${request.id}`
                 },
                 publishRequest: {
                     id: request.id,
@@ -20,7 +20,7 @@ module.exports = {
             res.json({ publishRequests: formattedRequests });
         } catch (error) {
             console.error(error);
-            res.status(500).json({ message: 'Ошибка при получении списка запросов на публикацию' });
+            res.status(500).json({ message: 'Request failed, no publishing data' });
         }
     }
 };
