@@ -7,7 +7,11 @@ const CONSTANTS = require('./src/constants');
 sequelize.sync({ force: true }); 
 
 Object.entries(schema).forEach(([path, { mode, handler }]) => {
-    app[mode](path, handler);
+    try {
+        app[mode](path, handler);
+    } catch (error) {
+        console.log(`[ERROR]: ${path} ${mode} is not suppored.`);
+    }
 });
 
 app.listen(CONSTANTS.PORT, () => {

@@ -1,17 +1,33 @@
-const { Template } = require('../../models')
+const { Template, User } = require('../../models')
 
 module.exports = {
     mode: 'get',
-    handler: async (req, res) => {
+    handler: async (_, res) => {
         try {
+            await User.create({
+                username: 'TestUser',
+                password: '123123'
+            });
+
             await Template.create({ 
                 name: 'Simple Template', 
-                content: '<h1>Hello, world!</h1>' 
+                content: `
+                    <h1>
+                        Hello, world!
+                    </h1>
+                `
             });
 
             await Template.create({ 
                 name: 'Basic Form', 
-                content: '<form><input type="text" name="username"><button type="submit">Submit</button></form>' 
+                content: `
+                    <form>
+                        <input type="text" name="username">
+                        <button type="submit">
+                            Submit
+                        </button>
+                    </form>
+                `
             });
  
             res.status(201).json({ message: 'Database seeded with test data' });

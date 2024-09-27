@@ -3,12 +3,13 @@ const { Sequelize, DataTypes } = require('sequelize');
 module.exports = {
     id: {
         type: DataTypes.INTEGER,
-       autoIncrement: true,
-       primaryKey: true,
+        autoIncrement: true,
+        primaryKey: true,
     },
     name: {
         type: DataTypes.STRING,
         allowNull: false,
+        defaultValue: ''
     },
     content: {
         type: DataTypes.TEXT,
