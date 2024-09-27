@@ -16,7 +16,7 @@ module.exports = {
 
             res.json({
                 _links: {
-                    href: `${HOST}/publish-requests/${template.id}/details`
+                    href: `${HOST}/templates/${template.id}/details`
                 },
                 template: {
                     id: template.id,
