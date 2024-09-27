@@ -1,5 +1,4 @@
 const { PublishRequest } = require('../../../models');
-const { HOST } = require('../../../constants');
 
 module.exports = {
     mode: 'get',

@@ -10,6 +10,22 @@ module.exports = {
         type: DataTypes.STRING,
         defaultValue: 'pending',
     },
+    author: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        references: {
+            model: 'users',
+            key: 'username'
+        }
+    },
+    templateId: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        references: {
+            model: 'templates',
+            key: 'id'
+        }
+    },
     createdAt: {
         type: DataTypes.DATE,allowNull: false,
         defaultValue: Sequelize.NOW,

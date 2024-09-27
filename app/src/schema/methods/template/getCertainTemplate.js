@@ -15,7 +15,11 @@ module.exports = {
                 _links: { 
                     href: `${HOST}/templates/${template.id}/details`
                 },
-                template: template
+                template: {
+                    id: template.id,
+                    createdAt: template.createdAt,
+                    updatedAt: template.updatedAt,
+                }
             });
         } catch (error) {
             console.error(error);

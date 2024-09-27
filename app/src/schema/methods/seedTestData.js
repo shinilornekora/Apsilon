@@ -32,7 +32,7 @@ module.exports = {
  
             res.status(201).json({ message: 'Database seeded with test data' });
         } catch (error) {
-            console.error(error);
+            console.log('Тестовая ручка упала, что-то делаешь не так.');
             res.status(500).json({ message: 'Error seeding database' });
         }
     }

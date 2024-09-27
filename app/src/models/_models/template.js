@@ -11,6 +11,14 @@ module.exports = {
         allowNull: false,
         defaultValue: ''
     },
+    username: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        references: {
+            model: 'users',
+            key: 'username'
+        }
+    },
     content: {
         type: DataTypes.TEXT,
         allowNull: false,

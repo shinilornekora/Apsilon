@@ -20,7 +20,8 @@ module.exports = {
                 },
                 template: {
                     id: template.id,
-                    status: template.status
+                    createdAt: template.createdAt,
+                    updatedAt: template.updatedAt,
                 }
             });
         } catch (error) {

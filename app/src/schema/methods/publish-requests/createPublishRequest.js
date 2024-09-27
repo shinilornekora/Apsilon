@@ -6,7 +6,9 @@ module.exports = {
     handler: async (req, res) => {
         try {
             const { status } = req.body;
-            const publishRequest = await PublishRequest.create({ status });
+            const userId = req.user.id;
+            
+            const publishRequest = await PublishRequest.create({ status, author: userId });
 
             res.status(201).json({
                 _links: {
