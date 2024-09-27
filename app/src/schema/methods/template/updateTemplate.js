@@ -8,7 +8,7 @@ module.exports = {
             const template = await Template.findByPk(req.params.id);
 
             if (!template) {
-                return res.status(404).json({ message: 'Запрос на публикацию не найден' });
+                return res.status(404).json({ message: 'Oops, error occurred, no templates for you!' });
             }
 
             const { name, content } = req.body;
@@ -26,7 +26,7 @@ module.exports = {
             });
         } catch (error) {
             console.error(error);
-            res.status(500).json({ message: 'Ошибка при обновлении запроса на публикацию' });
+            res.status(500).json({ message: 'Oops, error occurred, no templates for you!' });
         }
     }
 };

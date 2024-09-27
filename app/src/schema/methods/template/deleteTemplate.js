@@ -6,13 +6,13 @@ module.exports = {
         try {
             const template = await Template.findByPk(req.params.id);
             if (!template) {
-                return res.status(404).json({ message: 'Шаблон не найден' });
+                return res.status(404).json({ message: 'Template is not found.' });
             }
             await template.destroy();
             res.status(204).end(); // 204 No Content
         } catch (error) {
             console.error(error);
-            res.status(500).json({ message: 'Ошибка при удалении шаблона' });
+            res.status(500).json({ message: 'Template deletion error.' });
         }
     }
 }

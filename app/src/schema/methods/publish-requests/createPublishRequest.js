@@ -21,7 +21,7 @@ module.exports = {
             });
         } catch (error) {
             console.error(error);
-            res.status(500).json({ message: 'Ошибка при создании запроса на публикацию' });
+            res.status(500).json({ message: 'Request failed, no publishing anything.' });
         }
     }
 };

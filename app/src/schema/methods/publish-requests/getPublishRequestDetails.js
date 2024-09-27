@@ -7,13 +7,13 @@ module.exports = {
             const publishRequest = await PublishRequest.findByPk(req.params.id);
 
             if (!publishRequest) {
-                return res.status(404).json({ message: 'Запрос на публикацию не найден' });
+                return res.status(404).json({ message: 'Cannot find any relevant requests.' });
             }
 
             res.json(publishRequest);
         } catch (error) {
             console.error(error);
-            res.status(500).json({ message: 'Ошибка при получении деталей запроса на публикацию' });
+            res.status(500).json({ message: 'Request failed, no publishing data details' });
         }
     }
 };

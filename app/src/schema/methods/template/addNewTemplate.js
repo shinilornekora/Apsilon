@@ -28,10 +28,10 @@ module.exports = {
                 }
             });
         } catch (error) {
-            console.log('Ошибка создания шаблона.', error);
-            console.log('Возникла у пользователя: ', JSON.parse(JSON.stringify(req.user.dataValues)));
+            console.log('Template creation error.', error);
+            console.log('Bad user: ', JSON.parse(JSON.stringify(req.user.dataValues)));
 
-            res.status(500).json({ message: 'Ошибка при создании шаблона' });
+            res.status(500).json({ message: 'Template creation error.' });
         }
     }
 }
