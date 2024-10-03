@@ -3,9 +3,13 @@ const { graphqlHTTP } = require('express-graphql');
 const { readFileSync } = require('fs');
 const { join } = require('path');
 const { sequelize } = require('./src/models');
+const { makeExecutableSchema } = require('@graphql-tools/schema');
 const resolvers = require('./src/resolvers');
+const { PORT, HOST } = require('./src/constants');
 
-sequelize.sync({ force: true });
+sequelize.sync({ force: true }).catch(
+    error => console.log(`DB cannot be resolved, my lord! ${error.message}`)
+);
 
 const TYPEDEF_SCHEMA_PATH = join(__dirname, 'schema.graphql');
 const typeDefs = readFileSync(TYPEDEF_SCHEMA_PATH, 'utf8');
@@ -22,6 +26,6 @@ app.use('/graphql', graphqlHTTP({
     graphiql: true,
 }));
 
-app.listen(4000, () => {
-    console.log('GraphQL API runs at http://localhost:4000/graphql');
+app.listen(PORT, () => {
+    console.log(`GraphQL API runs at ${HOST}:${PORT}/graphql`);
 });

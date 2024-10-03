@@ -12,7 +12,7 @@ async function updatePublishRequest(_, { id, status, templateId }) {
     const publishRequest = await PublishRequest.findByPk(id);
 
     if (!publishRequest) {
-        throw new Error('Запрос не был найден, обновлять нечего');
+        throw new Error('PR was not found, sorry - no updates');
     }
 
     return await publishRequest.update({ 
@@ -25,12 +25,12 @@ async function deletePublishRequest(_, { id }) {
     const publishRequest = await PublishRequest.findByPk(id);
 
     if (!publishRequest) {
-        throw new Error('Запрос не был найден - удаление не сработало');
+        throw new Error('PR cannot be found - no deletions');
     }
 
     await publishRequest.destroy();
 
-    return `Запрос с айдишником ${id} удален`;
+    return `PR with id = ${id} was deleted successfully.`;
 }
 
 module.exports = {

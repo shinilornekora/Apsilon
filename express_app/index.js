@@ -9,7 +9,7 @@ const schema = require('./src/schema');
 const { sequelize } = require('./src/models');
 const { HOST, PORT } = require('./src/constants');
 
-sequelize.sync({ force: true }); 
+sequelize.sync({ force: true }).catch(error => console.log(`DB wasn't resolved, master! ${error.message}`));
 
 middlewares.forEach(middleware => app.use(middleware));
 
@@ -23,7 +23,7 @@ Object.entries(schema).forEach(([path, { mode, handler }]) => {
         app[mode](path, jsonParser, handler);
     } catch (error) {
         // Сейвит если мод у ручки указан кривой.
-        console.log(`[ERROR]: ${path} ${mode} is not suppored.`);
+        console.log(`[ERROR]: ${path} ${mode} is not supported.`);
     }
 });
 
