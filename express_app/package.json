@@ -1,14 +1,12 @@
 {
-  "name": "apsilon",
+  "name": "apsilon-rest-part",
   "version": "0.3.0",
-  "description": "Project for MQ notifier",
-  "main": "index.js",
+  "description": "Apsilon REST API",
   "scripts": {
-    "start": "node ./index.js",
-    "test": "npm run test"
+    "start": "node ./index.js"
   },
   "author": "shiniasse",
-  "license": "ISC",
+  "license": "MIT",
   "dependencies": {
     "bcrypt": "^5.1.1",
     "body-parser": "^1.20.3",

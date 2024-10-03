@@ -1,0 +1,20 @@
+{
+  "name": "apsilon",
+  "version": "1.0.0",
+  "description": "Main entrypoint",
+  "scripts": {
+    "prepare:api:express-api": "cd express_app && npm ci",
+    "prepare:api:graphql-api": "cd express_app && npm ci",
+    "prepare:api": "run-p prepare:api:*",
+    "prepare": "run-p prepare:*",
+    "start:api:express-api": "cd express_app && npm start",
+    "start:api:graphql-api": "cd graphql_app && npm start",
+    "start:api": "run-p start:api:*",
+    "start": "run-p start:*"
+  },
+  "author": "Shiniasse",
+  "license": "MIT",
+  "dependencies": {
+    "npm-run-all": "4.1.5"
+  }
+}

@@ -1,1 +1,5 @@
-/app/node_modules
+# Dependencies
+
+/express_app/node_modules
+/graphql_app/node_modules
+/node_modules
