@@ -16,6 +16,15 @@ type Template {
     updatedAt: String!
 }
 
+type User {
+    id: Int!
+    username: String!
+    password: String!
+    role: String!
+    createdAt: String!
+    updatedAt: String!
+}
+
 type Query {
     getPublishRequests: [PublishRequest]
     getPublishRequest(id: Int!): PublishRequest
@@ -31,4 +40,6 @@ type Mutation {
     createTemplate(name: String!, author: String!, content: String!): Template
     updateTemplate(id: Int!, name: String!, content: String!): Template
     deleteTemplate(id: Int!): String
+
+    createUser(username: String!, password: String!): User
 }

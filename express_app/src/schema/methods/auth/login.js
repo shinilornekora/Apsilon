@@ -20,7 +20,6 @@ module.exports = {
                 return res.status(401).json({ message: 'Invalid username or password' });
             }
     
-            // Генерируем токен
             const token = jwt.sign({ id: user.id }, 'jwt_secret', { expiresIn: '1h' });
             
             res.json({ token });

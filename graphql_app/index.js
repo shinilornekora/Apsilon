@@ -7,7 +7,7 @@ const { makeExecutableSchema } = require('@graphql-tools/schema');
 const resolvers = require('./src/resolvers');
 const { PORT, HOST } = require('./src/constants');
 
-sequelize.sync({ force: true }).catch(
+sequelize.sync().catch(
     error => console.log(`DB cannot be resolved, my lord! ${error.message}`)
 );
 

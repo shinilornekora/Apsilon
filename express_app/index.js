@@ -9,7 +9,9 @@ const schema = require('./src/schema');
 const { sequelize } = require('./src/models');
 const { HOST, PORT } = require('./src/constants');
 
-sequelize.sync({ force: true }).catch(error => console.log(`DB wasn't resolved, master! ${error.message}`));
+sequelize.sync().catch(
+    error => console.log(`DB wasn't resolved, master! ${error.message}`)
+);
 
 middlewares.forEach(middleware => app.use(middleware));
 
