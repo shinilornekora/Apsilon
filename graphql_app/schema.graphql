@@ -1,0 +1,34 @@
+type PublishRequest {
+    id: Int!
+    status: String!
+    author: String!
+    templateId: Int!
+    createdAt: String!
+    updatedAt: String!
+}
+
+type Template {
+    id: Int!
+    name: String!
+    author: String!
+    content: String!
+    createdAt: String!
+    updatedAt: String!
+}
+
+type Query {
+    getPublishRequests: [PublishRequest]
+    getPublishRequest(id: Int!): PublishRequest
+    getTemplates: [Template]
+    getTemplate(id: Int!): Template
+}
+
+type Mutation {
+    createPublishRequest(status: String!, author: String!, templateId: Int!): PublishRequest
+    updatePublishRequest(id: Int!, status: String!, templateId: Int!): PublishRequest
+    deletePublishRequest(id: Int!): String
+    
+    createTemplate(name: String!, author: String!, content: String!): Template
+    updateTemplate(id: Int!, name: String!, content: String!): Template
+    deleteTemplate(id: Int!): String
+}

@@ -7,13 +7,13 @@ const middlewares = require('./src/middlewares');
 
 const schema = require('./src/schema');
 const { sequelize } = require('./src/models');
-const CONSTANTS = require('./src/constants');
+const { HOST, PORT } = require('./src/constants');
 
 sequelize.sync({ force: true }); 
 
 middlewares.forEach(middleware => app.use(middleware));
-app.use(express.json());
 
+app.use(express.json());
 app.use(bodyParser.urlencoded({
     extended: true
 }));
@@ -27,6 +27,6 @@ Object.entries(schema).forEach(([path, { mode, handler }]) => {
     }
 });
 
-app.listen(CONSTANTS.PORT, () => {
-    console.log(`We run on http://localhost:${CONSTANTS.PORT}`);
+app.listen(PORT, () => {
+    console.log(`REST API runs at ${HOST}:${PORT}`);
 });
