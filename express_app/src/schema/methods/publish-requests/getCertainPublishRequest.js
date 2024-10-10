@@ -1,5 +1,5 @@
 const { PublishRequest } = require('../../../models');
-const { HOST } = require('../../../constants');
+const { HOST, PORT } = require('../../../constants');
 
 module.exports = {
     mode: 'get',
@@ -13,7 +13,7 @@ module.exports = {
 
             res.json({
                 _links: {
-                    href: `${HOST}/publish_requests/${publishRequest.id}/details`
+                    href: `${HOST}:${PORT}/publish_requests/${publishRequest.id}/details`
                 },
                 publishRequest: {
                     id: publishRequest.id,

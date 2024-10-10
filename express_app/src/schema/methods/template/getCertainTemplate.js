@@ -1,5 +1,5 @@
 const { Template } = require('../../../models');
-const { HOST } = require('../../../constants');
+const { HOST, PORT } = require('../../../constants');
 
 module.exports = {
     mode: 'get',
@@ -13,7 +13,7 @@ module.exports = {
 
             res.json({ 
                 _links: { 
-                    href: `${HOST}/templates/${template.id}/details`
+                    href: `${HOST}:${PORT}/templates/${template.id}/details`
                 },
                 template: {
                     id: template.id,

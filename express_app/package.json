@@ -1,7 +1,7 @@
 {
   "name": "apsilon-rest-part",
   "version": "0.3.0",
-  "description": "Apsilon REST API",
+  "description": "Apsilon REST API Hypermedia",
   "scripts": {
     "start": "node ./index.js"
   },

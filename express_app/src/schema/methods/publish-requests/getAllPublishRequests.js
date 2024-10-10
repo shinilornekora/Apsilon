@@ -1,5 +1,5 @@
 const { PublishRequest } = require('../../../models');
-const { HOST } = require('../../../constants');
+const { HOST, PORT } = require('../../../constants');
 
 module.exports = {
     mode: 'get',
@@ -9,7 +9,7 @@ module.exports = {
 
             const formattedRequests = publishRequests.map(request => ({
                 _links: {
-                    href: `${HOST}/publish_requests/${request.id}`
+                    href: `${HOST}:${PORT}/publish_requests/${request.id}`
                 },
                 publishRequest: {
                     id: request.id,

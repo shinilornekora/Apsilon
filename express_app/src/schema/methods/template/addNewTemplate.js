@@ -1,6 +1,6 @@
 const { Template } = require('../../../models');
 const { User } = require('../../../models');
-const { HOST } = require('../../../constants')
+const { HOST, PORT } = require('../../../constants')
 
 module.exports = {
     mode: 'post',
@@ -19,7 +19,7 @@ module.exports = {
 
             res.status(201).json({
                 _links: {
-                    self: `${HOST}/templates/${newTemplate.id}`
+                    self: `${HOST}:${PORT}/templates/${newTemplate.id}`
                 },
                 template: {
                     id: newTemplate.id,
