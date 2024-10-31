@@ -13,6 +13,10 @@ const middlewares = require('./src/middlewares');
 const schema = require('./src/schema');
 const { sequelize } = require('./src/models');
 const { HOST, PORT } = require('./src/constants');
+const Logger = require('./logger');
+
+const rabbitLogger = new Logger('RABBIT_MQ');
+const serverLogger = new Logger('SERVER');
 
 const app = express();
 const jsonParser = bodyParser.json();
@@ -57,7 +61,7 @@ const initPublisher = require('./src/rabbitmq/publisher');
     const publisher = await initPublisher(client);
     
     app.post('/send_to_rabbit', jsonParser, async (req, res) => {
-        const data = req.body;
+        let data = req.body;
 
         if (!data) {
             return res.status(400).json({
@@ -69,31 +73,29 @@ const initPublisher = require('./src/rabbitmq/publisher');
         try {
             data = JSON.stringify(data);
 
-            console.log("[RABBIT_MQ]: Sending a message...");
-            await publisher.send(Buffer.from(preparedData));
+            rabbitLogger.log("Sending a message...");
+            await publisher.send(Buffer.from(data));
         } catch (error) {
-            console.log("[RABBIT_MQ]: NOT_JSON_BODY")
+            rabbitLogger.log("NOT_JSON_BODY")
+            rabbitLogger.log(error)
             res.status(400).json({
                 error: 'BAD_BODY',
                 message: 'Body is not a valid JSON.'
             })
         }
-
-        console.log("[RABBIT_MQ]: Sending a message...");
-        await publisher.send(Buffer.from(preparedData));
     });
 
     // Отладочное, наверное потом выпилить
     app.post('/fatality', async () => {
-        console.log("[RABBIT_MQ]: Force connection reset was called..");
+        rabbitLogger.log("Force connection reset was called..");
         await client.close();
-        console.log("[RABBIT_MQ]: EXpected connection reset was accomplished, hooray :c");
+        rabbitLogger.log("EXpected connection reset was accomplished, hooray :c");
 
     })
 })().then(
-    () => console.log("Initializated the main source!")
-).catch(error => console.log('[RABBIT_MQ]: Oops! Initialization failed:', error))
+    () => rabbitLogger.log("Initializated the main source!")
+).catch(error => rabbitLogger.log('[Oops! Initialization failed:', error))
 
 app.listen(PORT, () => {
-    console.log(`Service runs at ${HOST}:${PORT}`);
+    serverLogger.log(`Service runs at ${HOST}:${PORT}`);
 });

@@ -1,9 +1,9 @@
 const rabbit = require("rabbitmq-stream-js-client");
 const { STREAM_NAME, STREAM_SIZE_RETENTION } = require('./constants');
-
+const logger = new (require('../../logger'))('RABBIT_MQ');
 
 module.exports = async function getClient() {
-    console.log('[RABBIT_MQ]: Let\'s rock! Main connection in process...')
+    logger.log('Let\'s rock! Main connection in process...')
     const client = await rabbit.connect({
         vhost: "/",
         port: 5552,
@@ -12,7 +12,7 @@ module.exports = async function getClient() {
         password: "guest",
     });
 
-    console.log('[RABBIT_MQ]: Good, let\'s see if stream exists...');
+    logger.log('Good, let\'s see if stream exists...')
     await client.createStream({ 
         stream: STREAM_NAME, 
         arguments: { 
@@ -20,6 +20,7 @@ module.exports = async function getClient() {
         } 
     });
 
-    // ensured, no doubts.
+    logger.log('Stream was successfully inited... YAY!')
+
     return client;
 }

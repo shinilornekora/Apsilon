@@ -1,4 +1,5 @@
 const { STREAM_NAME } = require('./constants');
+const logger = new (require('../../logger'))('RABBIT_MQ');
 
 module.exports = async function initPublisher(client) {
     try {
@@ -6,9 +7,11 @@ module.exports = async function initPublisher(client) {
             stream: STREAM_NAME 
         });
 
+        logger.log('Publisher was initializated!')
+
         return publisher
     } catch (fatal) {
-        console.log('[RABBIT_MQ]: Publisher has no power to initializate...\n')
-        console.log(fatal)
+        logger.log('Publisher has no power to initializate...\n')
+        logger.log(fatal)
     }
 }
