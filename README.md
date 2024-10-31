@@ -2,8 +2,8 @@
 
 Проект для изучения построения gRPC архитектуры.
 - express_app: REST API основного приложения
-- graphql_app: GraphQL API основного приложения
-- client: интерфейс основного приложения
+- express_app/src/graphql: GraphQL API основного приложения
+- express_app/src/rabbitmq: интерфейс основного приложения
 
 ## Потестировать
 

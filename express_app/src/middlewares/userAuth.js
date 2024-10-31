@@ -1,9 +1,16 @@
 const jwt = require('jsonwebtoken');
 const { User } = require('../models');
 
+const PUBLIC_PATHS = [
+    '/register',
+    '/login',
+    '/graphql',
+    '/send_to_rabbit',
+]
+
 module.exports = async (req, res, next) => {
     // Ну а иначе как мы вообще в систему то попадем
-    if (req.path === '/register' || req.path === '/login') {
+    if (PUBLIC_PATHS.includes(req.path)) {
         return next();
     }
 
