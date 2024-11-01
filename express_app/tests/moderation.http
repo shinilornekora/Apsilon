@@ -1,0 +1,9 @@
+POST http://localhost:3000/send_to_rabbit
+Content-Type: application/json
+
+{
+    "request_type": "moderation",
+    "template_content": "<h1>Check</h1>",
+    "template_name": "check",
+    "author": "Shiniasse"
+}

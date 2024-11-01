@@ -1,6 +1,6 @@
 const rabbit = require("rabbitmq-stream-js-client");
 const { STREAM_NAME, STREAM_SIZE_RETENTION } = require('./constants');
-const logger = new (require('../../logger'))('RABBIT_MQ');
+const logger = new (require('../../../logger'))('RABBIT_MQ');
 
 module.exports = async function getClient() {
     logger.log('Let\'s rock! Main connection in process...')

@@ -1,5 +1,5 @@
 const { STREAM_NAME } = require('./constants');
-const logger = new (require('../../logger'))('RABBIT_MQ');
+const logger = new (require('../../../logger'))('RABBIT_MQ');
 
 module.exports = async function initPublisher(client) {
     try {
