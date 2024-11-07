@@ -17,7 +17,7 @@ public class ConsumerApplication {
 
     @RabbitListener(queues = QUEUE_NAME)
     public void listen(String message) {
-        System.out.println("Message read from firstQueue : " + message);
+        System.out.println("[" + QUEUE_NAME + "]: " + message);
     }
 
     public static void main(String[] args) {
