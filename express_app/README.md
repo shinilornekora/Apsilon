@@ -21,7 +21,6 @@ app
 ------------ auth
 ------------ publish-requests
 ------------ template
------------- seedTestData.js
 ------ constants.js
 ```
 `app` - корневая папка приложения
