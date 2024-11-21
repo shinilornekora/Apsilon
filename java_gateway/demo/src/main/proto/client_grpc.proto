@@ -1,0 +1,18 @@
+syntax = "proto3";
+
+package com.example.grpc;
+
+option java_package = "com.example.grpc";
+option java_outer_classname = "MessageServiceProto";
+
+service MessageService {
+  rpc SendMessage (RequestMessage) returns (ResponseMessage);
+}
+
+message RequestMessage {
+  string text = 1;
+}
+
+message ResponseMessage {
+  string reply = 1;
+}
