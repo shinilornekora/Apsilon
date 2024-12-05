@@ -1,5 +1,6 @@
 const amqp = require('amqplib');
 const REQUEST_QUEUE = 'requestQueue';
+const NOTIFIER_QUEUE = 'notifierQueue';
 
 module.exports = async function initClient() {
     try {
@@ -12,8 +13,11 @@ module.exports = async function initClient() {
         });
         
         const channel = await connection.createChannel();
+
         await channel.assertQueue(REQUEST_QUEUE, { durable: true });
-        console.log(`Queue "${REQUEST_QUEUE}" was successfully created and ready to use.`);
+        await channel.assertQueue(NOTIFIER_QUEUE, { durable: true });
+
+        console.log(`Queues were successfully created and ready to use.`);
         
         return channel;
     } catch (error) {
