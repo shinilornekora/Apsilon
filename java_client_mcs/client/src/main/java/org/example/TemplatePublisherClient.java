@@ -18,7 +18,8 @@ public class TemplatePublisherClient {
         blockingStub = TemplateModerationGrpc.newBlockingStub(channel);
     }
 
-    public void publishTemplate(String templateJson) {
+    public PublishTemplateResponse publishTemplate(String templateJson) {
+//    public void publishTemplate(String templateJson) {
         Gson gson = new Gson();
         JsonObject requestJson = gson.fromJson(templateJson, JsonObject.class);
 
@@ -36,9 +37,11 @@ public class TemplatePublisherClient {
         try {
             response = blockingStub.publishTemplate(request);
             handleResponse(response);
+            return response;
         } catch (StatusRuntimeException e) {
             System.err.println("RPC failed: " + e.getStatus());
         }
+        return null;
     }
 
     private void handleResponse(PublishTemplateResponse response) {
@@ -59,7 +62,7 @@ public class TemplatePublisherClient {
     }
 
     public static void main(String[] args) throws InterruptedException {
-        ManagedChannel channel = ManagedChannelBuilder.forAddress("localhost", 50051)
+        ManagedChannel channel = ManagedChannelBuilder.forAddress("localhost", 8081)
                 .usePlaintext()
                 .build();
 

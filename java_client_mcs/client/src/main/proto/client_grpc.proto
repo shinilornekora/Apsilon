@@ -8,11 +8,11 @@ option java_outer_classname = "MessageServiceProto";
 service MessageService {
   rpc SendMessage(RequestMessage) returns(ResponseMessage);
 }
-
+// приходит с gateway
 message RequestMessage {
   string text = 1;
 }
-
+// ответ от grpc, который следует передать на gateway
 message ResponseMessage {
   string reply = 1;
 }

@@ -19,8 +19,8 @@ public class TemplateModerationService extends TemplateModerationGrpc.TemplateMo
             status = "REJECTED";
             description = "HTML содержит недопустимый тег <script>.";
         } else {
-            status = "APPROVED";
-            comment = "Шаблон успешно опубликован.";
+            status = "APPROVED. Hi from backend!";
+            comment = "The template has been successfully published.";
             rating = 5; // Пример рейтинга
         }
 

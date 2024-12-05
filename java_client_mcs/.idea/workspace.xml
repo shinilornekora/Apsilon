@@ -2,10 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="1bca09f5-293c-438b-a999-178829e6089f" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/../java_gateway/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/../java_gateway/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../java_gateway/demo/target/classes/com/example/ConsumerApplication.class" beforeDir="false" afterPath="$PROJECT_DIR$/../java_gateway/demo/target/classes/com/example/ConsumerApplication.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../java_gateway/demo/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/../java_gateway/demo/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../java_gateway/demo/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/../java_gateway/demo/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../java_gateway/demo/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../java_gateway/demo/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../java_gateway/demo/src/main/proto/client_grpc.proto" beforeDir="false" afterPath="$PROJECT_DIR$/../java_gateway/demo/src/main/proto/client_grpc.proto" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../java_gateway/demo/target/classes/application.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../java_gateway/demo/target/classes/com/example/ConsumerApplication.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../java_gateway/demo/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../java_gateway/demo/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -25,10 +27,11 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "WebServerToolWindowFactoryState": "false",
     "git-widget-placeholder": "master",
-    "last_opened_file_path": "C:/Users/Shiniasse/Desktop/SOP/Apsilon/java_client_mcs",
+    "last_opened_file_path": "C:/Users/Vinio/Desktop/new_dir/Apsilon/java_client_mcs",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
@@ -41,6 +44,7 @@
       <option name="presentableId" value="Default" />
       <updated>1732227511536</updated>
       <workItem from="1732227512591" duration="67000" />
+      <workItem from="1732751925142" duration="6000" />
     </task>
     <servers />
   </component>

@@ -1,5 +1,7 @@
 # Dependencies
 
+/java_gateway/demo/target
+/notifier/node_modules
 /express_app/node_modules
 /graphql_app/node_modules
 /node_modules

@@ -51,6 +51,11 @@
       <artifactId>grpc-stub</artifactId>
       <version>${grpc.version}</version>
     </dependency>
+<!--    <dependency>-->
+<!--      <groupId>com.google.protobuf</groupId>-->
+<!--      <artifactId>protobuf-java</artifactId>-->
+<!--      <version>3.24.0</version> &lt;!&ndash; Убедитесь, что версия актуальна &ndash;&gt;-->
+<!--    </dependency>-->
   </dependencies>
 
   <build>
