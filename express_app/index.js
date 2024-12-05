@@ -66,7 +66,16 @@ Object.entries(schema).forEach(([path, { mode, handler }]) => {
 
 const initRabbitQueue = require('./src/rabbitmq/queues/init');
 initRabbitQueue(rabbitLogger, app);
-/**************************************************************/
+/*************************************************************/
+
+/********************* UI ************************************/
+app.get('/ui', (_, res) => {
+    const path = join(__dirname, 'public.html');
+    const content = readFileSync(path, 'utf8');
+
+    res.send(content)
+})
+/*********************************************************** */
 
 app.listen(PORT, () => {
     serverLogger.log(`Service runs at ${HOST}:${PORT}`);

@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Test ui</title>
+    </head>
+    <body>
+        <div id="auth-key">
+        <div class="wrapper__forms">
+            <label for="form-content">Форма для запроса</label>
+            <form id="form-content" action="POST">
+                <input id="content" type="text">
+                <input id="name" type="text">
+                <input type="submit">
+            </form>
+            <label for="form-login">Форма для пользователя (login)</label>
+            <form id="form-login" action="POST">
+                <input id="login-login" type="text">
+                <input id="pass-login" type="text">
+                <input type="submit">
+            </form>
+            <label for="form-reg">Форма для пользователя (reg)</label>
+            <form id="form-reg" action="POST">
+                <input id="login-reg" type="text">
+                <input id="pass-reg" type="text">
+                <input type="submit">
+            </form>
+        </div>
+        <div class="wrapper__templates" id="templates">
+            <!-- Сюда будут вставляться шаблоны  -->
+        </div>
+        <div class="wrapper__publish__requests" id="publishRQ">
+            <!-- Здесь будут реквесты в ожидании + статус -->
+        </div>
+        <style>
+            .wrapper__forms {
+                display: flex;
+                flex-direction: row;
+                gap: 10px;
+            }
+        </style>
+
+        <script>
+            const contentForm = document.getElementById('form-content');
+            const regForm = document.getElementById('form-reg');
+            const loginForm = document.getElementById('form-login');
+            const templatesPlace = document.getElementById('templates');
+            const publishRQPlace = document.getElementById('publishRQ');
+            window.token = '';
+
+            const TEMPLATE__LAYOUT = `
+                <div class="template" id="tmplt-ID_PLACE">
+                    <div class="name">NAME_PLACE</div>
+                    <div class="content">CONTENT_PLACE</div>
+                    <button onclick="createRequest">Make PR</button>
+                </div>
+            `
+
+            const REQUEST__LAYOUT = `
+                <div class="template">
+                    <div class="name">NAME_PLACE</div>
+                    <div class="content">CONTENT_PLACE</div>
+                    <div class="status">STATUS_PLACE</div>
+                </div>
+            `
+
+            function createRequest(event) {
+                console.log(event.target);
+            }
+
+            contentForm.addEventListener('submit', async (event) => {
+                event.preventDefault();
+
+                const name = document.getElementById('name').value;
+                const content = document.getElementById('content').value;
+
+                await fetch('http://localhost:3000/templates/add', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ name, content }),
+                });
+
+                const templatesResponse = await fetch('http://localhost:3000/templates', {
+                    headers: {
+                        'Authorization': `Bearer ${window.token}`,
+                    },
+                });
+
+                const templates = await templatesResponse.json();
+
+                templatesPlace.innerHTML = '';
+
+                templates.forEach(({ content, name, id }) => {
+                    const result = TEMPLATE__LAYOUT
+                        .replace('NAME_PLACE', name)
+                        .replace('ID_PLACE', id)
+                        .replace('CONTENT_PLACE', content);
+
+                    const templateElement = document.createElement('div');
+                    templateElement.innerHTML = result;
+
+                    templatesPlace.appendChild(templateElement);
+                });
+            });
+
+            regForm.addEventListener('submit', async (event) => {
+                event.preventDefault();
+                const login = document.getElementById('login-reg');
+                const pass = document.getElementById('pass-reg');
+
+                const response = await fetch('localhost:3000/register', {
+                    method: 'POST',
+                    body: { login, pass },
+                })
+
+                alert(response.message);
+            })
+
+            loginForm.addEventListener('submit', async (event) => {
+                event.preventDefault();
+                const login = document.getElementById('login-login');
+                const pass = document.getElementById('pass-login');
+
+                const response = await fetch('localhost:3000/login', {
+                    method: 'POST',
+                    body: { login, pass },
+                })
+
+                if (response.token) {
+                    window.token = response.token;
+                    alert('ok')
+                    return;
+                }
+
+                alert('not ok')
+            })
+        </script>
+    </body>
+</html>
