@@ -9,21 +9,21 @@
         <div id="auth-key">
         <div class="wrapper__forms">
             <label for="form-content">Форма для запроса</label>
-            <form id="form-content" action="POST">
-                <input id="content" type="text">
-                <input id="name" type="text">
+            <form id="form-content" method="POST">
+                <input id="content" name="content" type="text">
+                <input id="name" name="name" type="text">
                 <input type="submit">
             </form>
             <label for="form-login">Форма для пользователя (login)</label>
-            <form id="form-login" action="POST">
-                <input id="login-login" type="text">
-                <input id="pass-login" type="text">
+            <form id="form-login" method="POST">
+                <input id="login-login" name="login" type="text">
+                <input id="pass-login" name="password" type="text">
                 <input type="submit">
             </form>
             <label for="form-reg">Форма для пользователя (reg)</label>
-            <form id="form-reg" action="POST">
-                <input id="login-reg" type="text">
-                <input id="pass-reg" type="text">
+            <form id="form-reg" method="POST">
+                <input id="login-reg" name="login" type="text">
+                <input id="pass-reg" name="password" type="text">
                 <input type="submit">
             </form>
         </div>
@@ -34,109 +34,99 @@
             <!-- Здесь будут реквесты в ожидании + статус -->
         </div>
         <style>
-            .wrapper__forms {
+            body, #auth-key {
+                display: flex;
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .wrapper__forms, .wrapper__templates, .wrapper__publish__requests {
                 display: flex;
                 flex-direction: row;
                 gap: 10px;
             }
         </style>
-
         <script>
             const contentForm = document.getElementById('form-content');
             const regForm = document.getElementById('form-reg');
             const loginForm = document.getElementById('form-login');
             const templatesPlace = document.getElementById('templates');
-            const publishRQPlace = document.getElementById('publishRQ');
-            window.token = '';
-
-            const TEMPLATE__LAYOUT = `
-                <div class="template" id="tmplt-ID_PLACE">
-                    <div class="name">NAME_PLACE</div>
-                    <div class="content">CONTENT_PLACE</div>
-                    <button onclick="createRequest">Make PR</button>
+        
+            const TEMPLATE_LAYOUT = (id, name, content) => `
+                <div class="template" id="tmplt-${id}">
+                    <div class="name">${name}</div>
+                    <div class="content">${content}</div>
+                    <button class="create-request-btn" data-id="${id}">Make PR</button>
                 </div>
-            `
-
-            const REQUEST__LAYOUT = `
-                <div class="template">
-                    <div class="name">NAME_PLACE</div>
-                    <div class="content">CONTENT_PLACE</div>
-                    <div class="status">STATUS_PLACE</div>
-                </div>
-            `
-
-            function createRequest(event) {
-                console.log(event.target);
-            }
-
+            `;
+        
+            const fetchTemplates = async () => {
+                const response = await fetch('http://localhost:3000/templates', {
+                    headers: { 'Authorization': `Bearer ${window.token}` },
+                });
+                const { templates } = await response.json();
+                
+                const data = await Promise.all(templates.map(async ({ id }) => {
+                    const req = await fetch(`http://localhost:3000/templates/${id}/details`, {
+                        headers: { 'Authorization': `Bearer ${window.token}` },
+                    });
+                    const { name, content } = await req.json();
+                    
+                    return name && content ? TEMPLATE_LAYOUT(id, name, content) : '';
+                }));
+                
+                templatesPlace.innerHTML = data.join('');
+            };
+        
+            templatesPlace.addEventListener('click', (event) => {
+                if (event.target.classList.contains('create-request-btn')) {
+                    const id = event.target.getAttribute('data-id');
+                    console.log(`Request created for template ID: ${id}`);
+                }
+            });
+        
             contentForm.addEventListener('submit', async (event) => {
                 event.preventDefault();
-
-                const name = document.getElementById('name').value;
-                const content = document.getElementById('content').value;
-
+                const { name, content } = Object.fromEntries(new FormData(contentForm));
                 await fetch('http://localhost:3000/templates/add', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${window.token}`,
                     },
                     body: JSON.stringify({ name, content }),
                 });
-
-                const templatesResponse = await fetch('http://localhost:3000/templates', {
-                    headers: {
-                        'Authorization': `Bearer ${window.token}`,
-                    },
-                });
-
-                const templates = await templatesResponse.json();
-
-                templatesPlace.innerHTML = '';
-
-                templates.forEach(({ content, name, id }) => {
-                    const result = TEMPLATE__LAYOUT
-                        .replace('NAME_PLACE', name)
-                        .replace('ID_PLACE', id)
-                        .replace('CONTENT_PLACE', content);
-
-                    const templateElement = document.createElement('div');
-                    templateElement.innerHTML = result;
-
-                    templatesPlace.appendChild(templateElement);
-                });
+                await fetchTemplates();
             });
-
+        
             regForm.addEventListener('submit', async (event) => {
                 event.preventDefault();
-                const login = document.getElementById('login-reg');
-                const pass = document.getElementById('pass-reg');
-
-                const response = await fetch('localhost:3000/register', {
+                const { login, password } = Object.fromEntries(new FormData(regForm));
+                const response = await fetch('http://localhost:3000/register', {
                     method: 'POST',
-                    body: { login, pass },
-                })
-
-                alert(response.message);
-            })
-
+                    body: JSON.stringify({ username: login, password: password, role: 'user' }),
+                    headers: { 'Content-Type': 'application/json' },
+                });
+                alert(JSON.stringify(await response.json()));
+            });
+        
             loginForm.addEventListener('submit', async (event) => {
                 event.preventDefault();
-                const login = document.getElementById('login-login');
-                const pass = document.getElementById('pass-login');
-
-                const response = await fetch('localhost:3000/login', {
+                const { login, password } = Object.fromEntries(new FormData(loginForm));
+                const response = await fetch('http://localhost:3000/login', {
                     method: 'POST',
-                    body: { login, pass },
-                })
-
-                if (response.token) {
-                    window.token = response.token;
-                    alert('ok')
-                    return;
+                    body: JSON.stringify({ username: login, password: password }),
+                    headers: { 'Content-Type': 'application/json' },
+                });
+                const { token } = await response.json();
+                if (token) {
+                    window.token = token;
+                    alert('ok');
+                    await fetchTemplates();
+                } else {
+                    alert('not ok');
                 }
-
-                alert('not ok')
-            })
+            });
         </script>
     </body>
 </html>

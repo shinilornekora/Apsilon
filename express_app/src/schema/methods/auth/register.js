@@ -12,9 +12,7 @@ module.exports = {
             if (existingUser) {
                 return res.status(400).json({ message: 'User already exists' });
             }
-    
             const hashedPassword = await bcrypt.hash(password, 10);
-    
             const newUser = await User.create({
                 username,
                 password: hashedPassword,
@@ -24,7 +22,7 @@ module.exports = {
             res.status(201).json({ message: 'User registered successfully', userId: newUser.id });
         } catch (error) {
             console.log('Too bad request, sorry - ', req.body);
-            res.status(500).json({ error: error });
+            res.status(500).json({ error: JSON.stringify(error) });
         }
     }
 }
