@@ -42,6 +42,8 @@ function broadcastMessage(protocol, message) {
             client.send(JSON.stringify({ protocol, message }));
         }
     });
+
+    console.log('Successfully transfered message:\n', message, '\nVia protocol:\n', protocol)
 }
 
 async function startAMQP() {
