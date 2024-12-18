@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test UI</title>
+    <link rel="stylesheet" src="./styles.css">
+</head>
+<body>
+    <div id="auth-key">
+        <div class="wrapper__forms">
+            <label for="form-reg">Форма для пользователя (reg)</label>
+            <form id="form-reg" method="POST">
+                <input id="login-reg" name="login" type="text">
+                <input id="pass-reg" name="password" type="text">
+                <input type="submit">
+            </form>
+            <label for="form-login">Форма для пользователя (login)</label>
+            <form id="form-login" method="POST">
+                <input id="login-login" name="login" type="text">
+                <input id="pass-login" name="password" type="text">
+                <input type="submit">
+            </form>
+            <label for="form-content">Форма для запроса</label>
+            <form id="form-content" method="POST">
+                <input id="content" name="content" type="text">
+                <input id="name" name="name" type="text">
+                <input type="submit">
+            </form>
+        </div>
+        <div class="wrapper__templates" id="templates">
+            <!-- Templates will be loaded here -->
+        </div>
+        <div class="wrapper__publish__requests" id="publishRQ">
+            <!-- Publish requests will be displayed here -->
+        </div>
+    </div>
+    <script src="scripts/helpers.js" type="module"></script>
+    <script src="scripts/templates.js" type="module"></script>
+    <script src="scripts/publishRequests.js" type="module"></script>
+    <script src="scripts/auth.js" type="module"></script>
+</body>
+</html>

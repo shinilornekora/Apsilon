@@ -1,0 +1,11 @@
+body, #auth-key {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.wrapper__forms, .wrapper__templates, .wrapper__publish__requests {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+}
