@@ -90,6 +90,23 @@
                 </executions>
             </plugin>
 
+            <!-- Spring Boot Plugin (optional, for easier packaging) -->
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <version>3.3.2</version>
+                <configuration>
+                    <mainClass>org.example.GrpcService</mainClass>
+                </configuration>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>repackage</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+
             <!-- Compiler Plugin -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -99,20 +116,6 @@
                     <source>21</source>
                     <target>21</target>
                 </configuration>
-            </plugin>
-
-            <!-- Spring Boot Plugin (optional, for easier packaging) -->
-            <plugin>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-maven-plugin</artifactId>
-                <version>3.3.2</version>
-                <executions>
-                    <execution>
-                        <goals>
-                            <goal>repackage</goal>
-                        </goals>
-                    </execution>
-                </executions>
             </plugin>
         </plugins>
     </build>
