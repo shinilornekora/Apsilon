@@ -53,7 +53,6 @@
             <artifactId>protobuf-java</artifactId>
             <version>${protobuf.version}</version>
         </dependency>
-<!--        чтобы json перегонать в protobuf Объект-->
         <dependency>
             <groupId>com.google.protobuf</groupId>
             <artifactId>protobuf-java-util</artifactId>
@@ -61,7 +60,6 @@
         </dependency>
     </dependencies>
 
-<!--    stack overflow помог-->
     <build>
         <extensions>
             <extension>
@@ -71,6 +69,7 @@
             </extension>
         </extensions>
         <plugins>
+            <!-- Protobuf Plugin -->
             <plugin>
                 <groupId>org.xolstice.maven.plugins</groupId>
                 <artifactId>protobuf-maven-plugin</artifactId>
@@ -90,7 +89,31 @@
                     </execution>
                 </executions>
             </plugin>
+
+            <!-- Compiler Plugin -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.11.0</version>
+                <configuration>
+                    <source>21</source>
+                    <target>21</target>
+                </configuration>
+            </plugin>
+
+            <!-- Spring Boot Plugin (optional, for easier packaging) -->
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <version>3.3.2</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>repackage</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
         </plugins>
     </build>
-
 </project>
