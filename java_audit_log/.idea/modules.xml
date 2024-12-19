@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/Apsilon.iml" filepath="$PROJECT_DIR$/.idea/Apsilon.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/java_audit_log.iml" filepath="$PROJECT_DIR$/.idea/java_audit_log.iml" />
     </modules>
   </component>
 </project>
