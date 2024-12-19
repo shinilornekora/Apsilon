@@ -14,7 +14,7 @@ export function setupMQTT() {
     });
 
     client.on('message', (_, message) => {
-        console.log('[MQTT] Received:', message.toString());
+        console.log('\n[MQTT] Received:', message, '\n');
     });
 
     client.on('error', (err) => {

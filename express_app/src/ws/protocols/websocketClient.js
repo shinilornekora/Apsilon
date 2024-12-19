@@ -9,7 +9,7 @@ export function setupWebSocket() {
 
     ws.on('message', (data) => {
         const { protocol, message } = JSON.parse(data);
-        console.log(`[WebSocket] Protocol: ${protocol}, Message: ${message}`);
+        console.log(`\n[WebSocket] Protocol: ${protocol}, Message: ${message}\n`);
     });
 
     ws.on('close', () => {

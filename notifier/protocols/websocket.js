@@ -28,5 +28,5 @@ export function sendWebSocket(message) {
         }
     });
     
-    console.log('Sent message via WebSocket:', message);
+    console.log('\nSent message via WebSocket:', message, '\n');
 }

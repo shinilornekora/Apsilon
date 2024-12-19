@@ -7,5 +7,5 @@ mqttClient.on('connect', () => console.log('Connected to MQTT broker'));
 
 export function sendMQTT(message) {
     mqttClient.publish('notifier/topic', message);
-    console.log('Sent message via MQTT:', message);
+    console.log('\nSent message via MQTT:', message, '\n');
 }

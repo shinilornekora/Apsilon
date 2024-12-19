@@ -2,8 +2,11 @@ import { sendAMQP } from '../protocols/amqp.js';
 import { sendMQTT } from '../protocols/mqtt.js';
 import { sendSTOMP } from '../protocols/stomp.js';
 import { sendWebSocket } from '../protocols/websocket.js';
+import { resolveMessage } from './helper.js';
 
 export async function sendMessage(protocol, message) {
+    message = resolveMessage(message)
+
     switch (protocol) {
         case 'amqp':
             await sendAMQP(message);
@@ -20,4 +23,5 @@ export async function sendMessage(protocol, message) {
         default:
             console.error('Unknown protocol:', protocol);
     }
+    console.log('-------------------------------------------------------------')
 }

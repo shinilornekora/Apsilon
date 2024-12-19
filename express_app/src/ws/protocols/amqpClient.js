@@ -16,11 +16,13 @@ export function setupAMQP() {
     connection.on('connection_open', () => {
         console.log('[AMQP] Connected via WebSocket');
 
-        const receiver = connection.open_receiver({ source: AMQP_QUEUE });
+        const receiver = connection.open_receiver({ 
+            source: AMQP_QUEUE
+        });
 
         receiver.on('message', (context) => {
             const msg = context.message.body;
-            console.log('[AMQP] Received:', msg);
+            console.log('\n[AMQP] Received:', msg, '\n');
         });
     });
 

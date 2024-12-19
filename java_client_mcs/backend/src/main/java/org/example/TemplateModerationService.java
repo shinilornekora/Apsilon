@@ -8,20 +8,18 @@ public class TemplateModerationService extends TemplateModerationGrpc.TemplateMo
 
     @Override
     public void publishTemplate(PublishTemplateRequest request, StreamObserver<PublishTemplateResponse> responseObserver) {
-        // Логика оценки шаблона
         String status;
         String comment = "";
         String description = "";
         int rating = 0;
 
-        // Пример логики оценки
         if (request.getTemplateContent().contains("<script>")) {
             status = "REJECTED";
             description = "HTML содержит недопустимый тег <script>.";
         } else {
             status = "APPROVED. Hi from backend!";
             comment = "The template has been successfully published.";
-            rating = 5; // Пример рейтинга
+            rating = 5;
         }
 
         PublishTemplateResponse response = PublishTemplateResponse.newBuilder()

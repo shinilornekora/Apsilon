@@ -19,7 +19,6 @@ public class TemplatePublisherClient {
     }
 
     public PublishTemplateResponse publishTemplate(String templateJson) {
-//    public void publishTemplate(String templateJson) {
         Gson gson = new Gson();
         JsonObject requestJson = gson.fromJson(templateJson, JsonObject.class);
 
