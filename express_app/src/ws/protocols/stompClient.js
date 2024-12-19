@@ -1,4 +1,5 @@
 import { Client } from '@stomp/stompjs';
+import { updateHtmlNode } from '../helper.js';
 
 // Инициализация STOMP клиента
 export const setupSTOMP = () => {
@@ -13,6 +14,8 @@ export const setupSTOMP = () => {
             console.log('STOMP connection established');
             client.subscribe('/topic/messages', (message) => {
                 console.log('[STOMP]: Received message:', message.body);
+
+                updateHtmlNode({ message: message.body })
             });
         },
         onWebSocketClose: () => {

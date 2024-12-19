@@ -1,6 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-    <head>
+<!DOCTYPE html><html lang="en"><head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Test ui</title>
@@ -30,7 +28,7 @@
         <div class="wrapper__templates" id="templates">
             <!-- Сюда будут вставляться шаблоны  -->
         </div>
-        <div class="wrapper__publish__requests" id="publishRQ">
+        <div class="wrapper__publish__requests" id="publishRequests">
             <!-- Здесь будут реквесты в ожидании + статус -->
         </div>
         <style>
@@ -191,6 +189,21 @@
                     alert('not ok');
                 }
             });
+
+            function fetchData() {
+                fetch('/data')
+                    .then(response => response.text())
+                    .then(data => {
+                        document.getElementById('publishRequests').textContent = data;
+                    })
+                    .catch(error => {
+                        console.error('Error fetching data:', error);
+                        document.getElementById('content').textContent = 'Error loading data';
+                    });
+            }
+
+            setInterval(fetchData, 5000);
         </script>
-    </body>
-</html>
+    
+
+</div></body></html>

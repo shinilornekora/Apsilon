@@ -1,4 +1,5 @@
 import mqtt from 'mqtt';
+import { updateHtmlNode } from '../helper.js';
 
 const MQTT_BROKER = 'mqtt://localhost';
 
@@ -15,6 +16,9 @@ export function setupMQTT() {
 
     client.on('message', (_, message) => {
         console.log('\n[MQTT] Received:', message, '\n');
+        const putMsg = Buffer.from(message, 'binary').toString('utf-8');
+
+        updateHtmlNode({ message: putMsg })
     });
 
     client.on('error', (err) => {

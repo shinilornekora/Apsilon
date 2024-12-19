@@ -3,6 +3,7 @@ const { makeExecutableSchema } = require('@graphql-tools/schema');
 const { graphqlHTTP } = require('express-graphql');
 const { readFileSync } = require('fs');
 const { join } = require('path');
+const fs = require('fs');
 const express = require('express');
 const bodyParser = require('body-parser');
 
@@ -75,6 +76,15 @@ app.get('/ui', (_, res) => {
 
     res.send(content)
 })
+
+app.get('/data', (req, res) => {
+    fs.readFile('data.txt', 'utf8', (err, data) => {
+        if (err) {
+            return res.status(500).send('Error reading file');
+        }
+        res.send(data);
+    });
+});
 /*********************************************************** */
 
 app.listen(PORT, () => {

@@ -1,4 +1,6 @@
 import rhea from 'rhea';
+import { updateHtmlNode } from '../helper.js';
+
 
 const AMQP_WS_URL = 'ws://localhost:15674/ws';
 const AMQP_QUEUE = 'notifierClientAMQPQueue';
@@ -22,7 +24,11 @@ export function setupAMQP() {
 
         receiver.on('message', (context) => {
             const msg = context.message.body;
-            console.log('\n[AMQP] Received:', msg, '\n');
+            console.log('\n[AMQP] Received:', msg.content, '\n');
+
+            const putMsg = Buffer.from(msg.content, 'binary').toString('utf-8');
+
+            updateHtmlNode({ message: putMsg })
         });
     });
 

@@ -7,6 +7,7 @@ const PUBLIC_PATHS = [
     '/graphql',
     '/send_to_rabbit',
     '/ui',
+    '/data'
 ]
 
 module.exports = async (req, res, next) => {
